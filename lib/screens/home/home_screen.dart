@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'home_provider.dart';
+import 'post/post_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,6 +17,11 @@ class HomeScreen extends StatelessWidget {
             title: const Text('Home'),
             actions: [
               IconButton(
+                tooltip: 'Refresh',
+                onPressed: model.scanPosts,
+                icon: const Icon(Icons.refresh),
+              ),
+              IconButton(
                 tooltip: 'Settings',
                 onPressed: model.goToSettings,
                 icon: const Icon(Icons.settings),
@@ -27,13 +33,13 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: ListView.builder(
-            itemCount: 4,
-            itemBuilder: (context, index) => const Card(
-              child: ListTile(
-                title: Text('one'),
-              ),
-            ),
+          body: ListView.separated(
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            itemCount: model.posts.length,
+            itemBuilder: (context, index) =>
+                PostContainer(directory: model.posts[index]),
+            separatorBuilder: (context, index) => const Divider(),
           ),
         );
       }),
