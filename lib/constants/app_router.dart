@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:offline_instagram/screens/home/post_screen/post_screen.dart';
 
 import '../screens/downloads/add_download/add_download_dialog.dart';
 import '../screens/downloads/downloads_screen.dart';
@@ -13,7 +14,12 @@ class AppRoutes {
     name: 'home',
     path: '/',
     builder: (context, state) => const HomeScreen(),
-    routes: [],
+  );
+  static final post = GoRoute(
+    name: 'post',
+    path: '/post',
+    builder: (context, state) =>
+        PostScreen(path: state.queryParams['path'] ?? ''),
   );
   // downloads
   static final downloads = GoRoute(
@@ -43,6 +49,7 @@ final appRouter = GoRouter(
   routes: <GoRoute>[
     // home
     AppRoutes.home,
+    AppRoutes.post,
     // downloads
     AppRoutes.downloads,
     AppRoutes.addDownload,
