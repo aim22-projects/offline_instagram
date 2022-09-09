@@ -34,11 +34,10 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           body: ListView.separated(
-            shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
+            // shrinkWrap: true, don't use shrinkwrap as inner page view will give error
             itemCount: model.posts.length,
             itemBuilder: (context, index) =>
-                PostContainer(directory: model.posts[index]),
+                PostContainer(path: model.posts[index].path),
             separatorBuilder: (context, index) => const Divider(),
           ),
         );
