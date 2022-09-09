@@ -1,34 +1,53 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
+import 'package:provider/provider.dart';
+
+import 'post_provider.dart';
 
 class PostContainer extends StatelessWidget {
-  final Directory directory;
-  const PostContainer({super.key, required this.directory});
+  final String path;
+  const PostContainer({super.key, required this.path});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          title: Text(basename(directory.path)),
-          subtitle: Text(directory.path),
-        ),
-        // PageView.builder(
-        //   itemCount: 3,
-        //   pageSnapping: true,
-        //   itemBuilder: (context, index) => Container(
-        //     width: 320,
-        //     height: 120,
-        //     margin: const EdgeInsets.all(8),
-        //     child: Text(index.toString()),
-        //   ),
-        // ),
-        // ListTile(
-        //   title: Text(basename(directory.path)),
-        // ),
-      ],
+    return ChangeNotifierProvider<PostProvider>(
+      create: (context) => PostProvider(context, path),
+      child: Consumer<PostProvider>(
+        builder: (context, model, child) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ListTile(
+                title: Text(basename(path)),
+              ),
+              SizedBox(
+                height: model.height,
+                child: PageView.builder(
+                  controller: PageController(
+                    initialPage: 0,
+                    keepPage: false,
+                    viewportFraction: 1,
+                  ),
+                  physics: const ClampingScrollPhysics(),
+                  scrollBehavior: const MaterialScrollBehavior(),
+                  itemCount: model.media.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () => model.goToPostScreen(model.media[index].path),
+                    child: Image.file(
+                      model.media[index],
+                      scale: 1,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
