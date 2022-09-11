@@ -17,7 +17,7 @@ class HomeProvider extends ChangeNotifier {
   }
   // getters
   List<Directory> get posts => _posts;
-  Future<Directory?> get _directory => Directory(appDirectory).create();
+  Future<Directory?> get _directory => Directory(workingDirectory).create();
   // setters
   set setPosts(List<Directory> value) {
     _posts = value;
@@ -25,7 +25,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   // public methods
-  void scanPosts() async {
+  Future<void> scanPosts() async {
     setPosts = (await _directory)!
         .listSync(followLinks: false)
         .whereType<Directory>()
