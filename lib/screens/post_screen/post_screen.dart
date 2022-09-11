@@ -8,9 +8,14 @@ class PostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InteractiveViewer(
-      maxScale: 5,
-      child: Image.file(File(path)),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: InteractiveViewer(
+          maxScale: 5,
+          child: Image.file(File(path)),
+        ),
+      ),
     );
   }
 }
