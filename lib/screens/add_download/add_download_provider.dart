@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AddDownloadProvider extends ChangeNotifier {
@@ -18,5 +18,9 @@ class AddDownloadProvider extends ChangeNotifier {
   }
 
   // public methods
+  void search() {
+    // ScaffoldMessenger.of(_context).showSnackBar(SnackBar(content: Text('')));
+  }
+
   void goBack() => GoRouter.of(_context).pop();
 }
