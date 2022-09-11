@@ -1,30 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import 'constants/app_router.dart';
-import 'constants/constants.dart';
+import 'app/app.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.portraitUp,
-    ]);
-    return MaterialApp.router(
-      title: appName,
-      theme: ThemeData.light().copyWith(useMaterial3: true),
-      darkTheme: ThemeData.dark().copyWith(useMaterial3: true),
-      themeMode: ThemeMode.system,
-      routeInformationProvider: appRouter.routeInformationProvider,
-      routeInformationParser: appRouter.routeInformationParser,
-      routerDelegate: appRouter.routerDelegate,
-    );
-  }
-}
+void main() => runApp(const App());
