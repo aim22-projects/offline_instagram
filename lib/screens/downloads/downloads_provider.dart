@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:offline_instagram/screens/downloads/download_task.dart';
 
-import '../../constants/app_router.dart';
 
 class DownloadsProvider extends ChangeNotifier {
   // private final fields
@@ -12,28 +11,46 @@ class DownloadsProvider extends ChangeNotifier {
   // ignore: unused_field
   StreamSubscription<String>? _streamSubscription;
   // private fields
-  List<String> _tasks = ['Image1', 'Image2'];
+  List<DownloadTask> _tasks = [
+    DownloadTask(
+      name: 'Post 1',
+      link: '',
+      path: '',
+      totalSize: 50,
+      downloadedSize: 10,
+      status: DownloadStatus.downloading,
+    ),
+    DownloadTask(
+      name: 'Post 2',
+      link: '',
+      path: '',
+      totalSize: 50,
+      downloadedSize: 50,
+      status: DownloadStatus.completed,
+    ),
+    DownloadTask(
+      name: 'Post 3',
+      link: '',
+      path: '',
+      totalSize: 50,
+      downloadedSize: 10,
+      status: DownloadStatus.canceled,
+    ),
+  ];
 
   DownloadsProvider(this._context);
 
-  set addTask(String value) {
+  set addTask(DownloadTask value) {
     _tasks.add(value);
     notifyListeners();
   }
 
   // public setters
-  set setTasks(List<String> value) {
+  set setTasks(List<DownloadTask> value) {
     _tasks = value;
     notifyListeners();
   }
 
   // public getters
-  List<String> get tasks => _tasks;
-
-  void openAddDownloadDialog([String? path]) {
-    GoRouter.of(_context).pushNamed(
-      AppRoutes.addDownload.name!,
-      queryParams: {'link': path},
-    );
-  }
+  List<DownloadTask> get tasks => _tasks;
 }
