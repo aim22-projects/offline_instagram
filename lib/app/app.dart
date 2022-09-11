@@ -10,17 +10,13 @@ class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    return MultiProvider(
-      providers: [
-        Provider<PermissionProvider>(
-          create: (context) => PermissionProvider(),
-        )
-      ],
+    return ChangeNotifierProvider.value(
+      value: PermissionProvider(),
       child: MaterialApp.router(
         title: appName,
         theme: ThemeData.light().copyWith(useMaterial3: true),
