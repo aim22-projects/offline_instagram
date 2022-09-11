@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mime/mime.dart';
 import 'package:offline_instagram/constants/app_router.dart';
 
 class PostProvider extends ChangeNotifier {
@@ -29,11 +30,20 @@ class PostProvider extends ChangeNotifier {
 
   // private methods
   void _getMedia(String path) async {
-    setMedia = Directory(path).listSync().whereType<File>().toList();
-    var currentMedia = await decodeImageFromList(media[0].readAsBytesSync());
+    // get all media (type images) from provided directory path
+    setMedia = Directory(path)
+        .listSync()
+        .whereType<File>()
+        .where((element) =>
+            lookupMimeType(element.path)?.startsWith('image/') ?? false)
+        .toList();
+    // if no media found return
+    if (media.isEmpty) return;
+    // get dimensions of first media
+    var firstMedia = await decodeImageFromList(media[0].readAsBytesSync());
     // ignore: use_build_context_synchronously
     var screenWidth = MediaQuery.of(context).size.width;
-    setHeight = currentMedia.height * screenWidth / currentMedia.width;
+    setHeight = firstMedia.height * screenWidth / firstMedia.width;
   }
 
   void goToPostScreen(String path) => GoRouter.of(context)
