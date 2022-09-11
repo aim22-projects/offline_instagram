@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../screens/downloads/downloads_screen.dart';
 import '../screens/error/error_screen.dart';
 import '../screens/home/home_screen.dart';
-import '../screens/post_screen/post_screen.dart';
+import '../screens/post/post_screen.dart';
 import '../screens/settings/settings_screen.dart';
 
 class AppRoutes {
