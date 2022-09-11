@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:offline_instagram/screens/downloads/download_task.dart';
 
+import '../../dialogs/add_download/add_download_dialog.dart';
+import 'download_task.dart';
 
 class DownloadsProvider extends ChangeNotifier {
   // private final fields
@@ -53,4 +54,11 @@ class DownloadsProvider extends ChangeNotifier {
 
   // public getters
   List<DownloadTask> get tasks => _tasks;
+
+  void showAddDownloadDialog() {
+    showDialog(
+      context: _context,
+      builder: (context) => const AddDownloadDialog(),
+    );
+  }
 }

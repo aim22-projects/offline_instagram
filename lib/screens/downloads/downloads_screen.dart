@@ -20,7 +20,7 @@ class DownloadsScreen extends StatelessWidget {
           floatingActionButton: FloatingActionButton.extended(
             icon: const Icon(Icons.add),
             label: const Text('Add'),
-            onPressed: () {},
+            onPressed: model.showAddDownloadDialog,
           ),
         );
       },
