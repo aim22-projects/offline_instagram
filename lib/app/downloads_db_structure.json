@@ -1,0 +1,25 @@
+[
+    {
+        "postname": "uitips",
+        "uri": "https://www.test.com",
+        "path": "downloads/uitips",
+        "height": 1234,
+        "width": 1000,
+        "downloads": [
+            {
+                "name": "image1",
+                "uri": "https://www.test.com/uitips/image1.jpg",
+                "path": "downloads/uitips/image1.jpg",
+                "size": 123,
+                "downloaded": 100
+            },
+            {
+                "name": "image2",
+                "uri": "https://www.test.com/uitips/image2.jpg",
+                "path": "downloads/uitips/image2.jpg",
+                "size": 123,
+                "downloaded": 100
+            }
+        ]
+    }
+]
